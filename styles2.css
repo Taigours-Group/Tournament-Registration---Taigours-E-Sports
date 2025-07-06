@@ -1,0 +1,186 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    line-height: 1.7;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(120, 219, 255, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.terms-container {
+    max-width: 900px;
+    margin: 60px auto 40px auto;
+    background: rgba(26, 26, 46, 0.85);
+    border-radius: 28px;
+    box-shadow: 0 10px 40px 0 rgba(0, 212, 255, 0.18), 0 1.5px 0 0 #00d4ff;
+    padding: 48px 36px 36px 36px;
+    border: 2.5px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(18px);
+    animation: fadeIn 1s cubic-bezier(0.4,0,0.2,1);
+}
+.terms-container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 28px;
+    padding: 2.5px;
+    background: linear-gradient(120deg, #00d4ff, #7c4dff, #ff00ff, #00d4ff 90%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.terms-container .logo2 {
+    display: flex;
+    width: 100px;
+    height: auto;
+    opacity: 1;
+    animation: logoImgFadeIn 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+}
+
+.terms-container .logo {
+    position: absolute;
+    width: 500px;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    opacity: 0;
+    pointer-events: none;
+    animation: logoImgFadeIn 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+    animation-delay: 1.3s;
+}
+
+@keyframes logoImgFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 0.1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.logo-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.logo-area img {
+    width: 120px;
+    height: auto;
+    border-radius: 18px;
+    box-shadow: 0 0 30px #00d4ff44;
+    opacity: 0.85;
+}
+
+h1 {
+    font-family: 'Orbitron', monospace;
+    font-size: 2.3rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, #00d4ff 0%, #7c4dff 60%, #ff00ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 25px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 30px rgba(0, 212, 255, 0.18);
+}
+
+h2 {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.25rem;
+    color: #00d4ff;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.10);
+    border-left: 4px solid #7c4dff;
+    padding-left: 12px;
+}
+
+ul {
+    margin-left: 30px;
+    margin-bottom: 20px;
+}
+
+ul li {
+    margin-bottom: 10px;
+    font-size: 1.08rem;
+    color: #e6e6e6;
+    padding-left: 8px;
+    position: relative;
+    line-height: 1.7;
+}
+
+ul li::before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
+    margin-left: -18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00d4ff, #7c4dff);
+    box-shadow: 0 0 8px #00d4ff99;
+    vertical-align: middle;
+}
+
+p {
+    margin-bottom: 20px;
+    color: #cccccc;
+    font-size: 1.12rem;
+    text-align: left;
+}
+
+@media (max-width: 700px) {
+    .terms-container {
+        padding: 18px 6px 18px 6px;
+        margin: 20px 4px;
+    }
+    h1 {
+        font-size: 1.3rem;
+    }
+    h2 {
+        font-size: 1.05rem;
+        padding-left: 7px;
+    }
+    .logo-area img {
+        width: 70px;
+    }
+}

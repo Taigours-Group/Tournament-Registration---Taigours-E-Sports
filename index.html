@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Tournament Registration - Taigours E-Sports</title>
+    <link rel="icon" href="assets/logo.png" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loadingScreen">
+        <div class="loading-content">
+            <img src="assets/logo.png" alt="Taigours Logo" class="loading-logo">
+            <h1 class="loading-title">Taigours E-Sports</h1>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <img src="assets/logo.png" alt="">
+            <div class="logo">
+                <h1>TAIGOURS E-SPORTS</h1>
+                <p>Free Fire Tournament Registration</p>
+            </div>
+            <div class="tournament-info">
+                <div class="info-badge">
+                    <span>🏆 Prize Pool</span>
+                    <strong>Rs. 1,000 + 1GB Data <br>Or <br> 1000 FF Diamonds + 1GB Data</strong>
+                </div>
+                <div class="info-badge">
+                    <span>📅 Date</span>
+                    <strong>July 15, 2025</strong>
+                </div>
+            </div>
+        </header>
+
+       <!----> <div id="frame">
+            <iframe  
+            src="https://www.youtube.com/embed/bCcaErhe8as?si=i7AMwT86dqZQBBqg&autoplay=1&mute=1" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allow="autoplay; encrypted-media" 
+            loading="lazy"
+            allowfullscreen>
+            </iframe>
+        </div>
+        </div>
+
+        <div class="instruction">
+            <h1>How to Register for the Tournament</h1>
+            <p>Follow these simple steps to complete your registration:</p>
+            <div class="steps">
+            <div class="step1">
+                <h2>Step 1: Fill the Registration Form</h2>
+                <p>Please fill out the registration form below with accurate information.</p>
+            </div>
+            <div class="step2">
+                <h2>Step 2: Submit the Form</h2>
+                <p>After filling out the form, click on the "Register Now" button to submit your registration.</p>
+           </div>
+            <div class="step3">
+                <h2>Step 3: Confirmation</h2>
+                <p>After submitting the form, you will be redirected to a confirmation page. <details> To complete your registration, please click the "Continue to Chat" button on that page to send us a WhatsApp message confirming your participation.</details></p>
+            </div>
+         </div>
+        </div>
+
+        <main class="main-content">
+            <form id="registrationForm" class="registration-form">
+                <div class="form-section">
+                    <h2>Player Information</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="fullName">Full Name *</label>
+                            <input type="text" id="fullName" name="fullName" required>
+                            <span class="error-message" id="fullNameError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="inGameName">In-Game Name *</label>
+                            <input type="text" id="inGameName" name="inGameName" required>
+                            <span class="error-message" id="inGameNameError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="freeFireUID">Free Fire UID *</label>
+                            <input type="number" id="freeFireUID" name="freeFireUID" required>
+                            <span class="error-message" id="freeFireUIDError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="whatsappNumber">WhatsApp Number *</label>
+                            <input type="tel" id="whatsappNumber" name="whatsappNumber" required>
+                            <span class="error-message" id="whatsappNumberError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="dateOfBirth">Date of Birth *</label>
+                            <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+                            <span class="error-message" id="dateOfBirthError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Location Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="province">Province *</label>
+                            <select id="province" name="province" required>
+                                <option value="">Select Province</option>
+                                <option value="Madhesh">Madhesh</option>
+                                <option value="Bagmati">Bagmati</option>
+                                <option value="Koshi">Koshi</option>
+                                <option value="Gandaki">Gandaki</option>
+                                <option value="Lumbini">Lumbini</option>
+                                <option value="Karnali">Karnali</option>
+                                <option value="Sudurpashchim">Sudurpashchim</option>
+                            </select>
+                            <span class="error-message" id="provinceError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="city">City/Village *</label>
+                            <input type="text" id="city" name="city" required>
+                            <span class="error-message" id="cityError"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h2>Tournament Details</h2>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="teamName">Team Name *</label>
+                            <input type="text" id="teamName" name="teamName" required>
+                            <span class="error-message" id="teamNameError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="server">Server *</label>
+                            <select id="server" name="server" required>
+                                <option value="">Select Server</option>
+                                <option value="India">India</option>
+                                <option value="Bangladesh">Bangladesh</option>
+                            </select>
+                            <span class="error-message" id="serverError"></span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="referCode">Refer Code (Optional)</label>
+                            <input type="text" id="referCode" name="referCode">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group registration-type">
+                        <label>Registration Type *</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" id="solo" name="registrationType" value="Solo" required>
+                                <label for="solo">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">Solo</span>
+                                </label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="duo" name="registrationType" value="Duo" required>
+                                <label for="duo">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">Duo</span>
+                                </label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" id="squad" name="registrationType" value="Squad" required>
+                                <label for="squad">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-text">Squad</span>
+                                </label>
+                            </div>
+                        </div>
+                        <span class="error-message" id="registrationTypeError"></span>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group checkbox-group">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" id="acceptTerms" name="acceptTerms" required>
+                            <label for="acceptTerms">
+                                <span class="checkbox-custom"></span>
+                                <span class="checkbox-text">I accept the <a href="Terms-and-Conditions.html">Terms & Conditions</a> *</span>
+                            </label>
+                        </div>
+                        <span class="error-message" id="acceptTermsError"></span>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Register Now</span>
+                        <span class="btn-loader" id="btnLoader"></span>
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <footer class="footer">
+            <p>For any queries, contact us on WhatsApp: <a href="https://wa.me/9779766115626" target="_blank">+977 9766115626</a></p>
+            <p>Follow us on social media for updates:</p>
+            <p><a href="https://www.facebook.com/profile.php?id=61572485841102" target="_blank">Facebook </a> | <a href="https://www.instagram.com/taigours_esports" target="_blank">Instagram</a> | <a href="https://www.youtube.com/@TaigoursE-Sports" target="_blank">YouTube</a></p>
+            <p>&copy; 2025 Taigours E-Sports. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="success-modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h3>Registration Successful!</h3>
+            <p>Your tournament registration has been submitted successfully. You will receive a confirmation on WhatsApp shortly.</p>
+            <p style="margin-top:10px;font-weight:600;color:#00d4ff;">Form submitted successfully! We will contact you very soon on WhatsApp.</p>
+            <button class="modal-close" id="modalClose">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
