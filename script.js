@@ -6,18 +6,13 @@ class TournamentRegistration {
         this.btnLoader = document.getElementById('btnLoader');
         this.successModal = document.getElementById('successModal');
         this.modalClose = document.getElementById('modalClose');
-        
         this.init();
     }
 
     init() {
         this.form.addEventListener('submit', this.handleSubmit.bind(this));
         this.modalClose.addEventListener('click', this.closeModal.bind(this));
-        
-        // Add real-time validation
         this.addInputValidation();
-        
-        // Add smooth animations
         this.addScrollAnimations();
     }
 
@@ -33,17 +28,12 @@ class TournamentRegistration {
         const fieldName = field.name;
         const value = field.value.trim();
         const errorElement = document.getElementById(`${fieldName}Error`);
-        
         let isValid = true;
         let errorMessage = '';
-
-        // Required field validation
         if (field.required && !value) {
             isValid = false;
             errorMessage = `${this.getFieldLabel(fieldName)} is required.`;
         }
-
-        // Specific field validations
         switch (fieldName) {
             case 'fullName':
                 if (value && value.length < 2) {
@@ -51,42 +41,36 @@ class TournamentRegistration {
                     errorMessage = 'Full name must be at least 2 characters long.';
                 }
                 break;
-                
             case 'inGameName':
                 if (value && value.length < 2) {
                     isValid = false;
                     errorMessage = 'In-game name must be at least 2 characters long.';
                 }
                 break;
-                
             case 'freeFireUID':
                 if (value && (value.length < 8 || value.length > 12)) {
                     isValid = false;
                     errorMessage = 'Free Fire UID must be between 8-12 digits.';
                 }
                 break;
-                
             case 'whatsappNumber':
                 if (value && !this.isValidPhoneNumber(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid WhatsApp number.';
                 }
                 break;
-                
             case 'email':
                 if (value && !this.isValidEmail(value)) {
                     isValid = false;
                     errorMessage = 'Please enter a valid email address.';
                 }
                 break;
-                
             case 'dateOfBirth':
                 if (value && !this.isValidAge(value)) {
                     isValid = false;
                     errorMessage = 'You must be at least 13 years old to participate.';
                 }
                 break;
-                
             case 'teamName':
                 if (value && value.length < 2) {
                     isValid = false;
@@ -94,12 +78,10 @@ class TournamentRegistration {
                 }
                 break;
         }
-
         if (errorElement) {
             errorElement.textContent = errorMessage;
             field.classList.toggle('error', !isValid);
         }
-
         return isValid;
     }
 
@@ -107,12 +89,10 @@ class TournamentRegistration {
         const registrationTypes = document.querySelectorAll('input[name="registrationType"]');
         const isSelected = Array.from(registrationTypes).some(radio => radio.checked);
         const errorElement = document.getElementById('registrationTypeError');
-        
         if (!isSelected) {
             errorElement.textContent = 'Please select a registration type.';
             return false;
         }
-        
         errorElement.textContent = '';
         return true;
     }
@@ -120,21 +100,17 @@ class TournamentRegistration {
     validateTerms() {
         const termsCheckbox = document.getElementById('acceptTerms');
         const errorElement = document.getElementById('acceptTermsError');
-        
         if (!termsCheckbox.checked) {
             errorElement.textContent = 'You must accept the terms and conditions.';
             return false;
         }
-        
         errorElement.textContent = '';
         return true;
     }
 
     clearError(field) {
         const errorElement = document.getElementById(`${field.name}Error`);
-        if (errorElement) {
-            errorElement.textContent = '';
-        }
+        if (errorElement) errorElement.textContent = '';
         field.classList.remove('error');
     }
 
@@ -177,35 +153,23 @@ class TournamentRegistration {
 
     async handleSubmit(e) {
         e.preventDefault();
-        // Validate all fields
         let isFormValid = true;
         const inputs = this.form.querySelectorAll('input, select');
         inputs.forEach(input => {
-            if (!this.validateField(input)) {
-                isFormValid = false;
-            }
+            if (!this.validateField(input)) isFormValid = false;
         });
-        if (!this.validateRegistrationType()) {
-            isFormValid = false;
-        }
-        if (!this.validateTerms()) {
-            isFormValid = false;
-        }
+        if (!this.validateRegistrationType()) isFormValid = false;
+        if (!this.validateTerms()) isFormValid = false;
         if (!isFormValid) {
             this.showError('Please fix all errors before submitting.');
             return;
         }
-        // Get form data
         const formData = this.getFormData();
-        // Create WhatsApp message
         const message = this.createWhatsAppMessage(formData);
-        const targetNumber = '9779766115626'; 
-        // Encode message for URL
+        const targetNumber = '9779766115626';
         const encodedMsg = encodeURIComponent(message);
-        // Open WhatsApp Web with pre-filled message
         const waUrl = `https://wa.me/${targetNumber}?text=${encodedMsg}`;
         window.open(waUrl, '_blank');
-        // Show modal and reset form
         this.showSuccessModal();
         this.form.reset();
     }
@@ -213,75 +177,20 @@ class TournamentRegistration {
     getFormData() {
         const formData = new FormData(this.form);
         const data = {};
-        
         for (let [key, value] of formData.entries()) {
             data[key] = value;
         }
-        
         return data;
     }
 
-    async sendToWhatsApp(data) {
-        // Create message
-        const message = this.createWhatsAppMessage(data);
-        // Send to backend server
-        const response = await fetch('http://localhost:3000/send-whatsapp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message })
-        });
-        if (!response.ok) throw new Error('Failed to send WhatsApp message');
-    }
-
     createWhatsAppMessage(data) {
-        const message = `
-🎮 *FREE FIRE TOURNAMENT REGISTRATION* 🎮
-
-👤 *Player Information:*
-• Full Name: ${data.fullName}
-• In-Game Name: ${data.inGameName}
-• Free Fire UID: ${data.freeFireUID}
-• WhatsApp: ${data.whatsappNumber}
-• Email: ${data.email}
-• Date of Birth: ${data.dateOfBirth}
-
-📍 *Location:*
-• Province: ${data.province}
-• City/Village: ${data.city}
-
-🏆 *Tournament Details:*
-• Team Name: ${data.teamName}
-• Registration Type: ${data.registrationType}
-• Server: ${data.server}
-${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
-
-📅 *Registration Date:* ${new Date().toLocaleDateString()}
-
-✅ Terms & Conditions: Accepted
-
----
-*Taigours E-Sports Tournament*
-*Registration ID: ${Date.now()}*
-        `.trim();
-        
-        return message;
-    }
-
-    setLoadingState(isLoading) {
-        this.submitBtn.disabled = isLoading;
-        this.submitBtn.classList.toggle('loading', isLoading);
-        
-        if (isLoading) {
-            this.submitBtn.style.cursor = 'not-allowed';
-        } else {
-            this.submitBtn.style.cursor = 'pointer';
-        }
+        const message = `\n🎮 *FREE FIRE TOURNAMENT REGISTRATION* 🎮\n\n👤 *Player Information:*\n• Full Name: ${data.fullName}\n• In-Game Name: ${data.inGameName}\n• Free Fire UID: ${data.freeFireUID}\n• WhatsApp: ${data.whatsappNumber}\n• Email: ${data.email}\n• Date of Birth: ${data.dateOfBirth}\n\n📍 *Location:*\n• Province: ${data.province}\n• City/Village: ${data.city}\n\n🏆 *Tournament Details:*\n• Team Name: ${data.teamName}\n• Registration Type: ${data.registrationType}\n• Server: ${data.server}\n${data.referCode ? `• Refer Code: ${data.referCode}` : ''}\n\n📅 *Registration Date:* ${new Date().toLocaleDateString()}\n\n✅ Terms & Conditions: Accepted\n\n---\n*Taigours E-Sports Tournament*\n*Registration ID: ${Date.now()}*`;
+        return message.trim();
     }
 
     showSuccessModal() {
         this.successModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-        // No need to update modal content dynamically; both messages are in the HTML.
     }
 
     closeModal() {
@@ -290,7 +199,6 @@ ${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
     }
 
     showError(message) {
-        // Create and show error notification
         const errorDiv = document.createElement('div');
         errorDiv.className = 'error-notification';
         errorDiv.textContent = message;
@@ -307,13 +215,8 @@ ${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
             box-shadow: 0 5px 15px rgba(255, 68, 68, 0.3);
             animation: slideInRight 0.3s ease-out;
         `;
-        
         document.body.appendChild(errorDiv);
-        
-        // Remove after 5 seconds
-        setTimeout(() => {
-            errorDiv.remove();
-        }, 5000);
+        setTimeout(() => { errorDiv.remove(); }, 5000);
     }
 
     addScrollAnimations() {
@@ -321,7 +224,6 @@ ${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
         };
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -329,8 +231,6 @@ ${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
                 }
             });
         }, observerOptions);
-
-        // Observe form sections
         const sections = document.querySelectorAll('.form-section');
         sections.forEach(section => {
             section.style.opacity = '0';
@@ -340,12 +240,10 @@ ${data.referCode ? `• Refer Code: ${data.referCode}` : ''}
     }
 }
 
-// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new TournamentRegistration();
 });
 
-// Loading screen fade out
 window.addEventListener('load', function() {
     const loadingScreen = document.getElementById('loadingScreen');
     if (loadingScreen) {
@@ -354,27 +252,13 @@ window.addEventListener('load', function() {
     }
 });
 
-// Add CSS animations for error notifications
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideInRight {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        from { opacity: 0; transform: translateX(100px); }
+        to { opacity: 1; transform: translateX(0); }
     }
-    
-    .error {
-        border-color: #ff4444 !important;
-        box-shadow: 0 0 20px rgba(255, 68, 68, 0.3) !important;
-    }
-    
-    .error-notification {
-        animation: slideInRight 0.3s ease-out;
-    }
+    .error { border-color: #ff4444 !important; box-shadow: 0 0 20px rgba(255, 68, 68, 0.3) !important; }
+    .error-notification { animation: slideInRight 0.3s ease-out; }
 `;
 document.head.appendChild(style);
