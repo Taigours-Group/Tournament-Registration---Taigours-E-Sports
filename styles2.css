@@ -58,17 +58,25 @@ body::before {
     z-index: 0;
 }
 
-.terms-container .logo2 {
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.logo2 {
     display: flex;
     width: 100px;
     height: auto;
     opacity: 1;
-    animation: logoImgFadeIn 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
 }
 
 .terms-container .logo {
     position: absolute;
     width: 500px;
+    align-items: normal;
     height: auto;
     top: 50%;
     left: 50%;
@@ -100,13 +108,7 @@ body::before {
     align-items: center;
     margin-bottom: 30px;
 }
-.logo-area img {
-    width: 120px;
-    height: auto;
-    border-radius: 18px;
-    box-shadow: 0 0 30px #00d4ff44;
-    opacity: 0.85;
-}
+
 
 h1 {
     font-family: 'Orbitron', monospace;
