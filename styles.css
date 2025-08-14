@@ -788,11 +788,13 @@ label a {
     }
     
     .tournament-info {
+        align-items: center;
         flex-direction: column;
         gap: 15px;
     }
     
     .info-badge {
+        width: 95%;
         min-width: auto;
     }
 
